@@ -1,0 +1,40 @@
+.overallContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  width: 100vw;
+
+  .authForm {
+    .formTitle {
+      text-align: center;
+    }
+
+    .p-field {
+      margin-top: 30px;
+    }
+
+    .forgetOrNew {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+
+      & a {
+        text-decoration: none;
+        color: black;
+        font-size: small;
+        font-style: italic;
+      }
+
+      :hover {
+        color: blue;
+      }
+    }
+
+    .formSubmitButton {
+      text-align: center;
+      margin-top: 30px;
+    }
+  }
+}
