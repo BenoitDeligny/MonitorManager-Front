@@ -1,1 +1,111 @@
-<div class="overallContainer"></div>
+<div class="overallContainer">
+  <div class="authForm">
+    <div class="formTitle">
+      <h1>MonitorManager</h1>
+      <h2>Signup</h2>
+    </div>
+    <form #signupForm="ngForm">
+      <div class="p-field">
+        <span class="p-float-label p-input-icon-left">
+          <input
+            id="float-input"
+            name="firstname"
+            type="text"
+            pInputText
+            ngModel
+            #firstname="ngModel"
+            required
+          />
+          <label for="float-input">Firstname</label>
+        </span>
+      </div>
+      <div class="p-field">
+        <span class="p-float-label p-input-icon-left">
+          <input
+            id="float-input"
+            name="lastname"
+            type="text"
+            pInputText
+            ngModel
+            #lastname="ngModel"
+            required
+          />
+          <label for="float-input">Lastname</label>
+        </span>
+      </div>
+      <div class="p-field">
+        <span class="p-float-label p-input-icon-left">
+          <input
+            id="float-input"
+            name="email"
+            type="email"
+            pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+            pInputText
+            ngModel
+            #email="ngModel"
+            required
+          />
+          <label for="float-input">Email</label>
+        </span>
+        <small
+          id="float-input-help"
+          class="p-error"
+          *ngIf="!email.valid && email.touched"
+          >This is not a valid email !</small
+        >
+      </div>
+      <div class="p-field">
+        <span class="p-float-label p-input-icon-left">
+          <input
+            id="float-input"
+            name="alias"
+            type="text"
+            pInputText
+            ngModel
+            #alias="ngModel"
+            minlength="3"
+            maxlength="4"
+            required
+          />
+          <label for="float-input">Alias</label>
+        </span>
+      </div>
+      <div class="p-field">
+        <span class="p-float-label p-input-icon-left">
+          <input
+            id="float-input"
+            name="password"
+            type="text"
+            pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+            pInputText
+            ngModel
+            #password="ngModel"
+            required
+          />
+          <label for="float-input">Password</label>
+        </span>
+        <small
+          id="float-input-help"
+          class="p-error"
+          *ngIf="!password.valid && password.touched"
+          >Password must contain 1 uppercase, 1 number, 1 symbol and between 8
+          and 12 character</small
+        >
+      </div>
+      <div class="alreadyAnAccount">
+        <a routerLink="/auth/signin">Already an account ?</a>
+      </div>
+      <div class="formSubmitButton">
+        <button
+          pButton
+          pRipple
+          type="button"
+          label="Submit"
+          class="p-button-raised"
+          [disabled]="!signupForm.valid"
+          (click)="createUser(signupForm)"
+        ></button>
+      </div>
+    </form>
+  </div>
+</div>
