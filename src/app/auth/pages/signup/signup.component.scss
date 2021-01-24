@@ -1,0 +1,50 @@
+.overallContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+  .authForm {
+    .formTitle {
+      text-align: center;
+    }
+
+    .p-field {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+
+      & small {
+        max-width: 250px;
+      }
+    }
+
+    .alreadyAnAccount {
+      display: flex;
+      justify-content: center;
+      margin-top: 5px;
+
+      & a {
+        text-decoration: none;
+        color: black;
+        font-size: small;
+        font-style: italic;
+      }
+
+      :hover {
+        color: blue;
+      }
+    }
+
+    .formSubmitButton {
+      text-align: center;
+      margin-top: 30px;
+
+      :hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
