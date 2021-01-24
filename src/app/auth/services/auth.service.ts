@@ -19,4 +19,11 @@ export class AuthService {
       });
     // TODO find how to import .shareReplay();
   }
+
+  createUser(formUser: any) {
+    const createdUser = formUser;
+    return this.http
+      .post<any>(environment.localUrl + 'users', createdUser)
+      .subscribe((data) => console.log(data));
+  }
 }
