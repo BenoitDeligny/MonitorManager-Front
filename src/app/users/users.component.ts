@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { User } from '../shared/models/user';
 import { UsersService } from './services/users.service';
 
 @Component({
@@ -14,9 +15,9 @@ export class UsersComponent implements OnInit, OnDestroy {
   // * Mise en place des subscriptions afin de pouvoir unsubscribe
   subscription1$: Subscription;
 
-  users: any[];
-  user: any;
-  selectedUsers: any[];
+  users: User[];
+  user: User;
+  selectedUsers: User[];
   userDialog: boolean;
   submitted: boolean;
 
@@ -65,14 +66,14 @@ export class UsersComponent implements OnInit, OnDestroy {
     });
   }
 
-  editUser(user: any) {
+  editUser(user: User) {
     this.user = { ...user };
     this.userDialog = true;
   }
 
-  deleteUser(user: any) {
+  deleteUser(user: User) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + user.name + '?',
+      message: 'Are you sure you want to delete ' + user.lastname + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
@@ -98,7 +99,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.submitted = true;
 
     if (this.user.id) {
-      this.users[this.findIndexById(this.user.id)] = this.user;
+      this.users[this.findIndexById(this.user.id.toString())] = this.user;
       this.usersService.updateUser(this.user);
       this.messageService.add({
         severity: 'success',
@@ -130,7 +131,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   findIndexById(id: string): number {
     let index = -1;
     for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].id === id) {
+      if (this.users[i].id === +id) {
         index = i;
         break;
       }
