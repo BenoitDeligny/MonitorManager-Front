@@ -1,0 +1,51 @@
+.overallContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+
+  .cardsContainer {
+    display: grid;
+    grid-template-columns: 250px 50px 250px;
+    grid-template-rows: 250px 50px 250px;
+
+    .usersManager {
+      grid-column-start: 1;
+    }
+    .customersManager {
+      grid-column-start: 3;
+    }
+    .monitorsManager {
+      grid-column-start: 1;
+      grid-row-start: 3;
+    }
+    .charts {
+      grid-column-start: 3;
+      grid-row-start: 3;
+    }
+
+    .usersManager,
+    .customersManager,
+    .monitorsManager,
+    .charts {
+      .cardManager {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        transition: all 0.4s ease;
+
+        i {
+          font-size: 50px;
+        }
+      }
+
+      .cardManager:hover {
+        cursor: pointer;
+        transform: scale(1.15);
+      }
+    }
+  }
+}
