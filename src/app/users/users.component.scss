@@ -1,0 +1,29 @@
+.overallContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 98vh;
+
+  .usersTable {
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    width: 100%;
+    .p-datatable-header {
+      display: flex;
+      justify-content: center;
+      padding: 5px;
+
+      button,
+      .p-input-icon-left {
+        margin: 0px 10px;
+      }
+    }
+    .p-datatable-tbody {
+      td {
+        padding: 5px;
+      }
+    }
+  }
+}

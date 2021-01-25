@@ -1,0 +1,194 @@
+<div class="overallContainer">
+  <h1>UsersTable Manager</h1>
+  <div class="usersTable">
+    <p-toast></p-toast>
+
+    <!-- * Tableau de données -->
+    <p-table
+      #dt
+      [value]="users"
+      [globalFilterFields]="['firstname', 'lastname', 'alias', 'email']"
+      [(selection)]="selectedUsers"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      [scrollable]="true"
+      [rows]="2"
+      scrollHeight="600px"
+      [virtualScroll]="true"
+      [virtualRowHeight]="34"
+    >
+      >
+      <ng-template pTemplate="caption">
+        <div class="p-d-flex p-ai-center p-jc-between">
+          <button
+            pButton
+            pRipple
+            label="New"
+            icon="pi pi-plus"
+            class="p-button-raised"
+            (click)="openNew()"
+          ></button>
+          <button
+            pButton
+            pRipple
+            label="Delete"
+            icon="pi pi-trash"
+            class="p-button-raised p-button-danger"
+            (click)="deleteSelectedUsers()"
+            [disabled]="!selectedUsers || !selectedUsers.length"
+          ></button>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="dt.filterGlobal($event.target.value, 'contains')"
+              placeholder="Search..."
+            />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3rem">
+            <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+          </th>
+          <th pSortableColumn="firstname">
+            Firstname <p-sortIcon field="firstname"></p-sortIcon>
+          </th>
+          <th pSortableColumn="lastname">
+            Lastname <p-sortIcon field="lastname"></p-sortIcon>
+          </th>
+          <th pSortableColumn="alias">
+            Alias <p-sortIcon field="alias"></p-sortIcon>
+          </th>
+          <th pSortableColumn="email">
+            Email <p-sortIcon field="email"></p-sortIcon>
+          </th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="user"></p-tableCheckbox>
+          </td>
+          <td>{{ user.firstname }}</td>
+          <td>{{ user.lastname }}</td>
+          <td>{{ user.alias }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-pencil"
+              class="p-button-rounded p-button-info p-mr-2"
+              (click)="editUser(user)"
+            ></button>
+            <button
+              pButton
+              pRipple
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-danger"
+              (click)="deleteUser(user)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+
+  <!-- * Modale de création et d'édition -->
+  <p-dialog
+    [(visible)]="userDialog"
+    [style]="{ width: '450px' }"
+    header="user Details"
+    [modal]="true"
+    styleClass="p-fluid"
+  >
+    <ng-template pTemplate="content">
+      <div class="p-field">
+        <label for="firstname">Firstname</label>
+        <input
+          type="text"
+          pInputText
+          id="firstname"
+          [(ngModel)]="user.firstname"
+          required
+          autofocus
+        />
+        <small class="p-invalid" *ngIf="submitted && !user.firstname"
+          >Firstname is required.</small
+        >
+      </div>
+      <div class="p-field">
+        <label for="lastname">Lastname</label>
+        <input
+          type="text"
+          pInputText
+          id="lastname"
+          [(ngModel)]="user.lastname"
+          required
+          autofocus
+        />
+        <small class="p-invalid" *ngIf="submitted && !user.lastname"
+          >Lastname is required.</small
+        >
+      </div>
+      <div class="p-field">
+        <label for="alias">Alias</label>
+        <input
+          type="text"
+          pInputText
+          id="alias"
+          [(ngModel)]="user.alias"
+          required
+          autofocus
+        />
+        <small class="p-invalid" *ngIf="submitted && !user.alias"
+          >Alias is required.</small
+        >
+      </div>
+      <div class="p-field">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          pInputText
+          id="email"
+          [(ngModel)]="user.email"
+          required
+          autofocus
+        />
+        <small class="p-invalid" *ngIf="submitted && !user.email"
+          >Email is required.</small
+        >
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+      <button
+        pButton
+        pRipple
+        label="Cancel"
+        icon="pi pi-times"
+        class="p-button-text"
+        (click)="hideDialog()"
+      ></button>
+      <button
+        pButton
+        pRipple
+        label="Save"
+        icon="pi pi-check"
+        class="p-button-text"
+        (click)="saveUser()"
+        [disabled]="
+          !user.firstname || !user.lastname || !user.email || !user.alias
+        "
+      ></button>
+    </ng-template>
+  </p-dialog>
+
+  <p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>
+</div>
