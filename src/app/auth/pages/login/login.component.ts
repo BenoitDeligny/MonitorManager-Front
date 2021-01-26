@@ -3,7 +3,6 @@ import { Form, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { AuthService } from '../../services/auth.service';
-import { globalesConstants } from '../../../shared/constants/globalesConstants';
 
 @Component({
   templateUrl: './login.component.html',
@@ -37,7 +36,9 @@ export class LoginComponent implements OnInit {
           setTimeout(() => this.router.navigate(['/home']), 1500);
           this.authService
             .accessProfile()
-            .subscribe((data) => (globalesConstants.currentUser = data));
+            .subscribe((data) =>
+              localStorage.setItem('currentUSer', JSON.stringify(data))
+            );
         },
         (err) => {
           this.messageService.add({
