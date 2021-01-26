@@ -23,6 +23,11 @@ const routes: Routes = [
       import('./customers/customers.module').then((m) => m.CustomersModule),
   },
   {
+    path: 'monitors',
+    loadChildren: () =>
+      import('./monitors/monitors.module').then((m) => m.MonitorsModule),
+  },
+  {
     path: '**',
     component: HomeComponent,
   },

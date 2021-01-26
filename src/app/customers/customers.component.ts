@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { Customer } from '../shared/models/customer';
@@ -11,7 +11,7 @@ import { CustomersService } from './services/customers.service';
   providers: [MessageService, ConfirmationService],
   encapsulation: ViewEncapsulation.None,
 })
-export class CustomersComponent implements OnInit {
+export class CustomersComponent implements OnInit, OnDestroy {
   // * Mise en place des subscriptions afin de pouvoir unsubscribe
   subscription1$: Subscription;
 

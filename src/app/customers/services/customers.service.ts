@@ -14,12 +14,12 @@ export class CustomersService {
     return this.http.get<Customer[]>(environment.localUrl + 'customers');
   }
 
-  saveCustomer(user: Customer) {
-    this.http.post(environment.localUrl + 'customers', user).subscribe();
+  saveCustomer(customer: Customer) {
+    this.http.post(environment.localUrl + 'customers', customer).subscribe();
   }
 
-  updateCustomer(user: Customer) {
-    this.http.put(environment.localUrl + 'customers', user).subscribe();
+  updateCustomer(customer: Customer) {
+    this.http.put(environment.localUrl + 'customers', customer).subscribe();
   }
 
   deleteCustomer(id: number): void {
