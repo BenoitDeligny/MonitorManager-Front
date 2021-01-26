@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { AuthService } from '../../services/auth.service';
 
@@ -12,7 +13,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private primengConfig: PrimeNGConfig,
     private authService: AuthService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,12 +33,13 @@ export class LoginComponent implements OnInit {
             detail: 'You are connected !',
             life: 3000,
           });
+          setTimeout(() => this.router.navigate(['/home']), 1500);
         },
         (err) => {
           this.messageService.add({
             severity: 'error',
             summary: 'Bad crédentials',
-            detail: 'Email or password invalid !',
+            detail: 'Email and/or password invalid !',
             life: 3000,
           });
         }

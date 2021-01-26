@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
@@ -13,7 +14,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private primengConfig: PrimeNGConfig,
     private authService: AuthService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +33,7 @@ export class SignupComponent implements OnInit {
             detail: 'Account created !',
             life: 4000,
           });
+          setTimeout(() => this.router.navigate(['/auth']), 2000);
         },
         (err) => {
           if (err.error.statusCode === 409) {
