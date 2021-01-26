@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/shared/models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -9,15 +10,15 @@ import { Observable } from 'rxjs';
 export class UsersService {
   constructor(private http: HttpClient) {}
 
-  getAllUsers(): Observable<any[]> {
-    return this.http.get<any[]>(environment.localUrl + 'users');
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(environment.localUrl + 'users');
   }
 
-  saveUser(user: any) {
+  saveUser(user: User) {
     this.http.post(environment.localUrl + 'users', user).subscribe();
   }
 
-  updateUser(user: any) {
+  updateUser(user: User) {
     this.http.put(environment.localUrl + 'users', user).subscribe();
   }
 
