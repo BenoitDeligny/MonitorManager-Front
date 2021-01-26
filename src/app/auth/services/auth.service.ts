@@ -5,9 +5,7 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { catchError, shareReplay } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user';
-import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,10 +15,11 @@ export class AuthService {
 
   logUser(formUser: User) {
     const user = formUser;
-
     return this.http.post<User>(environment.localUrl + 'auth/login', user);
+  }
 
-    // TODO find how to import .shareReplay();
+  accessProfile() {
+    return this.http.get(environment.localUrl + 'profile');
   }
 
   createUser(formUser: User) {
