@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpResponse,
+} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { shareReplay } from 'rxjs/operators';
+import { catchError, shareReplay } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,18 +18,13 @@ export class AuthService {
   logUser(formUser: User) {
     const user = formUser;
 
-    return this.http
-      .post<User>(environment.localUrl + 'auth/login', user)
-      .subscribe((token) => {
-        localStorage.setItem('jwt_token', token['access_token']);
-      });
+    return this.http.post<User>(environment.localUrl + 'auth/login', user);
+
     // TODO find how to import .shareReplay();
   }
 
   createUser(formUser: User) {
     const createdUser = formUser;
-    return this.http
-      .post<User>(environment.localUrl + 'users', createdUser)
-      .subscribe();
+    return this.http.post<User>(environment.localUrl + 'users', createdUser);
   }
 }

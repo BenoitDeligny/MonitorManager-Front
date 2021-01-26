@@ -12,6 +12,7 @@ import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { SignupComponent } from './pages/signup/signup.component';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [LoginComponent, SignupComponent],
@@ -23,6 +24,7 @@ import { SignupComponent } from './pages/signup/signup.component';
     PasswordModule,
     ButtonModule,
     RippleModule,
+    ToastModule,
   ],
 })
 export class AuthModule {}
