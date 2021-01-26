@@ -8,8 +8,6 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'signin', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  /* { path: 'auth', component: LoginComponent },
-  { path: '**', component: LoginComponent }, */
 ];
 
 @NgModule({
