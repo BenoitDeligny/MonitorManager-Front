@@ -7,10 +7,11 @@ import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
-import { HeaderComponent } from './shared/components/header/header.component';
+import { AvatarModule } from 'primeng/avatar';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, HeaderComponent],
@@ -21,6 +22,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
     HttpClientModule,
     CardModule,
     ToastModule,
+    AvatarModule,
   ],
   providers: [
     {
