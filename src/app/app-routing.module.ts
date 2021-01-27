@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
+import { RoleGuard } from 'src/app/shared/guards/role.guard';
 
 const routes: Routes = [
   {
@@ -17,6 +17,7 @@ const routes: Routes = [
     path: 'users',
     loadChildren: () =>
       import('./users/users.module').then((m) => m.UsersModule),
+    canActivate: [RoleGuard],
   },
   {
     path: 'customers',

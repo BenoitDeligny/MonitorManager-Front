@@ -34,11 +34,7 @@ export class LoginComponent implements OnInit {
             life: 3000,
           });
           setTimeout(() => this.router.navigate(['/home']), 1500);
-          this.authService
-            .accessProfile()
-            .subscribe((data) =>
-              localStorage.setItem('currentUSer', JSON.stringify(data))
-            );
+          this.authService.accessProfile().subscribe();
         },
         (err) => {
           this.messageService.add({
