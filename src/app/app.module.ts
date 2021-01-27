@@ -10,9 +10,10 @@ import { HomeComponent } from './pages/home/home.component';
 
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, HeaderComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
