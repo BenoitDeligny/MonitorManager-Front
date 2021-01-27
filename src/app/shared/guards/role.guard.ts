@@ -68,6 +68,7 @@ export class RoleGuard
         if (data['role'].name === role) {
           return true;
         } else {
+          alert("Vous n'avez pas les droits pour acceder à cette page !");
           this.router.navigate(['/home']);
           return false;
         }
