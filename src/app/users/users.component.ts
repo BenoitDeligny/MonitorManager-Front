@@ -112,7 +112,6 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.userDialog = false;
       this.user = {};
     } else {
-      this.user.password = this.createPassword();
       this.usersService.saveUser(this.user);
       this.users.push(this.user);
       this.messageService.add({
@@ -138,15 +137,5 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
 
     return index;
-  }
-
-  createPassword(): string {
-    let id = '';
-    var chars =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (var i = 0; i < 7; i++) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return id;
   }
 }

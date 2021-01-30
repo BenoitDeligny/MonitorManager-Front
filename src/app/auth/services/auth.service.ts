@@ -19,7 +19,7 @@ export class AuthService {
   }
 
   accessProfile() {
-    return this.http.get(environment.localUrl + 'profile');
+    return this.http.get(environment.localUrl + 'users/profile');
   }
 
   createUser(formUser: User) {

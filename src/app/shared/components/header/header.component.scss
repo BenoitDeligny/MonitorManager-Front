@@ -1,11 +1,7 @@
-.overallContainer {
-  width: 100vw;
+.headerContainer {
+  height: 30%;
+  width: 100%;
   .logo {
     display: flex;
-  }
-  .p-card-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 }
