@@ -1,15 +1,15 @@
-.overallContainer {
+.monitorsContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  height: 98vh;
+  width: 100%;
 
-  .customersTable {
+  .monitorsTable {
     display: flex;
     align-items: flex-end;
     height: 100%;
-    width: 100%;
+    width: 75%;
     .p-datatable-header {
       display: flex;
       justify-content: center;
