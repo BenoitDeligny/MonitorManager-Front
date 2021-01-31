@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
@@ -8,7 +9,16 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  items = [
+    { label: 'Home', route: 'home', id: 0 },
+    { label: 'Users', route: 'users', id: 1 },
+    { label: 'Customers', route: 'customers', id: 2 },
+    { label: 'Monitors', route: 'monitors', id: 3 },
+    { label: 'Charts', route: 'charts', id: 4 },
+  ];
+  currentItem = 0;
+
+  constructor(private authService: AuthService, public router: Router) {}
 
   ngOnInit(): void {}
 

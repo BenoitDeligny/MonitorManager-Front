@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
+import { TabMenuModule } from 'primeng/tabmenu';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { RippleModule } from 'primeng/ripple';
     TableModule,
     ButtonModule,
     RippleModule,
+    TabMenuModule,
   ],
   providers: [
     {

@@ -2,7 +2,18 @@
   <div class="logo" [routerLink]="['/home']">
     <img src="assets/logo-1898929_640.png" alt="Logo Deux M" />
   </div>
-  <h1>Monitor Manager</h1>
+  <div class="titleMenu">
+    <h1>Monitor Manager</h1>
+    <div class="menu">
+      <p-tabMenu [model]="items" [activeItem]="currentItem">
+        <ng-template pTemplate="item" let-item let-i="index">
+          <span [routerLink]="[item.route]">
+            {{ item.label }}
+          </span>
+        </ng-template></p-tabMenu
+      >
+    </div>
+  </div>
   <div class="settings">
     <p-avatar
       icon="pi pi-user"
