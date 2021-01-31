@@ -1,7 +1,40 @@
 .headerContainer {
-  height: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 20vh;
   width: 100%;
-  .logo {
-    display: flex;
+  padding: 0px 25px;
+
+  .logo img {
+    height: 80px;
+    width: 80px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
+
+  h1 {
+    font-size: 35px;
+  }
+
+  .settings {
+    .p-avatar {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    .menuOption {
+      &:hover {
+        cursor: pointer;
+        background-color: rgba(170, 170, 170, 0.3);
+      }
+    }
+  }
+}
+
+* {
+  outline: none;
 }

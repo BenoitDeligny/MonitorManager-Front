@@ -1,0 +1,112 @@
+<div class="userInfosContainer">
+  <p-toast></p-toast>
+  <div class="userInfos">
+    <span class="p-float-label">
+      <input
+        id="Firstname"
+        type="text"
+        pInputText
+        [(ngModel)]="currentUser.firstname"
+      />
+      <label for="Firstname">Firstname</label>
+    </span>
+    <span class="p-float-label">
+      <input
+        id="Lastname"
+        type="text"
+        pInputText
+        [(ngModel)]="currentUser.lastname"
+      />
+      <label for="Lastname">Lastname</label>
+    </span>
+    <span class="p-float-label">
+      <input
+        id="Email"
+        type="email"
+        pInputText
+        [(ngModel)]="currentUser.email"
+      />
+      <label for="Email">Email</label>
+    </span>
+    <span class="p-float-label">
+      <input
+        id="Alias"
+        type="text"
+        pInputText
+        [(ngModel)]="currentUser.alias"
+      />
+      <label for="Alias">Alias</label>
+    </span>
+    <span class="p-float-label passwordInput">
+      <input
+        id="float-input"
+        name="password"
+        type="text"
+        pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$"
+        pInputText
+        ngModel
+        #password="ngModel"
+        [(ngModel)]="currentUser.password"
+        required
+      />
+      <label for="float-input">New Password</label>
+    </span>
+    <small
+      id="float-input-help"
+      class="p-error"
+      *ngIf="!password.valid && password.touched"
+      >Must contain 1 uppercase, 1 number, 1 symbol and between 8 and 12
+      character</small
+    >
+    <span class="p-float-label">
+      <input
+        id="Role"
+        type="text"
+        pInputText
+        value="{{ currentUser.role.name }}"
+        disabled
+      />
+      <label for="Role">Role</label>
+    </span>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Update my profile"
+      class="p-button-raised"
+      (click)="updateProfile(currentUser)"
+    ></button>
+  </div>
+  <div class="userCustomers">
+    <p-card>
+      <p-table
+        [scrollable]="true"
+        scrollHeight="350px"
+        [value]="currentUser.customers"
+        [virtualScroll]="true"
+        [virtualRowHeight]="34"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="customerName">
+              CustomerName <p-sortIcon field="customerName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="address">
+              Address <p-sortIcon field="address"></p-sortIcon>
+            </th>
+            <th pSortableColumn="department">
+              Department <p-sortIcon field="department"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer>
+          <tr>
+            <td>{{ customer.customerName }}</td>
+            <td>{{ customer.address }}</td>
+            <td>{{ customer.department }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card>
+  </div>
+</div>

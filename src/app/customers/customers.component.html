@@ -54,17 +54,17 @@
           <th style="width: 3rem">
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
-          <th pSortableColumn="firstname">
-            Firstname <p-sortIcon field="firstname"></p-sortIcon>
+          <th pSortableColumn="customerName">
+            CustomerName <p-sortIcon field="customerName"></p-sortIcon>
           </th>
-          <th pSortableColumn="lastname">
-            Lastname <p-sortIcon field="lastname"></p-sortIcon>
+          <th pSortableColumn="address">
+            Address <p-sortIcon field="address"></p-sortIcon>
           </th>
-          <th pSortableColumn="alias">
-            Alias <p-sortIcon field="alias"></p-sortIcon>
+          <th pSortableColumn="department">
+            Department <p-sortIcon field="department"></p-sortIcon>
           </th>
-          <th pSortableColumn="email">
-            Email <p-sortIcon field="email"></p-sortIcon>
+          <th pSortableColumn="monitors">
+            Monitors <p-sortIcon field="monitors"></p-sortIcon>
           </th>
           <th>Actions</th>
         </tr>
@@ -74,10 +74,10 @@
           <td>
             <p-tableCheckbox [value]="customer"></p-tableCheckbox>
           </td>
-          <td>{{ customer.firstname }}</td>
-          <td>{{ customer.lastname }}</td>
-          <td>{{ customer.alias }}</td>
-          <td>{{ customer.email }}</td>
+          <td>{{ customer.customerName }}</td>
+          <td>{{ customer.address }}</td>
+          <td>{{ customer.department }}</td>
+          <td>{{ customer.monitors }}</td>
           <td>
             <button
               pButton

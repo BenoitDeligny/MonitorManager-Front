@@ -12,9 +12,21 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { AvatarModule } from 'primeng/avatar';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { RippleModule } from 'primeng/ripple';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, HeaderComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    HeaderComponent,
+    ProfileComponent,
+  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -23,6 +35,12 @@ import { AvatarModule } from 'primeng/avatar';
     CardModule,
     ToastModule,
     AvatarModule,
+    OverlayPanelModule,
+    InputTextModule,
+    FormsModule,
+    TableModule,
+    ButtonModule,
+    RippleModule,
   ],
   providers: [
     {

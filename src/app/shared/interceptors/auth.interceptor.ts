@@ -24,7 +24,6 @@ export class AuthInterceptor implements HttpInterceptor {
         Authorization: `Bearer ${localStorage.getItem('jwt_token')}`,
       },
     });
-
     return next.handle(request).pipe(
       tap(
         (event: HttpEvent<any>) => {

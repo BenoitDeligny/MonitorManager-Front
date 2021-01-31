@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Form, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
@@ -8,8 +8,12 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   providers: [MessageService],
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent implements OnInit {
+  displayModal = false;
+  recoverEmail = '';
+
   constructor(
     private primengConfig: PrimeNGConfig,
     private authService: AuthService,
@@ -46,5 +50,31 @@ export class LoginComponent implements OnInit {
         }
       );
     }
+  }
+
+  showModal() {
+    this.displayModal = true;
+  }
+
+  sendRecoveryPassword(email: string) {
+    this.displayModal = false;
+    this.authService.recoverPassword(email).subscribe(
+      (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Successful',
+          detail: 'Check your email to get your new password !',
+          life: 3000,
+        });
+      },
+      (err) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Bad email',
+          detail: 'The email do not exist !',
+          life: 3000,
+        });
+      }
+    );
   }
 }
