@@ -6,7 +6,7 @@
     <p-table
       #dt
       [value]="customers"
-      [globalFilterFields]="['firstname', 'lastname', 'alias', 'email']"
+      [globalFilterFields]="['firstname', 'lastname', 'alias', 'commercial']"
       [(selection)]="selectedCustomers"
       [rowHover]="true"
       dataKey="id"
@@ -63,8 +63,8 @@
           <th pSortableColumn="department">
             Department <p-sortIcon field="department"></p-sortIcon>
           </th>
-          <th pSortableColumn="monitors">
-            Monitors <p-sortIcon field="monitors"></p-sortIcon>
+          <th pSortableColumn="commercial">
+            Commercial <p-sortIcon field="commercial"></p-sortIcon>
           </th>
           <th>Actions</th>
         </tr>
@@ -77,7 +77,7 @@
           <td>{{ customer.customerName }}</td>
           <td>{{ customer.address }}</td>
           <td>{{ customer.department }}</td>
-          <td>{{ customer.monitors }}</td>
+          <td>{{ customer.commercial }}</td>
           <td>
             <button
               pButton

@@ -22,8 +22,10 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // * active l'effet blanc au clique du bouton
+    // * active l'effet au clique du bouton
     this.primengConfig.ripple = true;
+
+    this.router.navigate(['home']);
   }
 
   onSubmit(loginForm: NgForm) {
