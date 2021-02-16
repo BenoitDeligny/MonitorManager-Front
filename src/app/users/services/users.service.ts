@@ -15,6 +15,10 @@ export class UsersService {
     return this.http.get<User[]>(environment.localUrl + 'users');
   }
 
+  getUserById(id: number): Observable<User> {
+    return this.http.get<User>(environment.localUrl + 'users/id/' + id);
+  }
+
   saveUser(user: User) {
     this.http.post(environment.localUrl + 'users', user).subscribe();
   }

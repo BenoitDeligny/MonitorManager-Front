@@ -24,6 +24,12 @@
   </div>
   <div class="settings">
     <p-avatar
+      *ngIf="
+        route !== '/' &&
+        route !== '/auth' &&
+        route !== '/auth/signin' &&
+        route !== '/auth/signup'
+      "
       icon="pi pi-user"
       (click)="op.toggle($event)"
       styleClass="p-mr-2"

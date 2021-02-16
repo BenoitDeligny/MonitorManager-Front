@@ -6,7 +6,13 @@
     <p-table
       #dt
       [value]="customers"
-      [globalFilterFields]="['firstname', 'lastname', 'alias', 'commercial']"
+      [globalFilterFields]="[
+        'customerName',
+        'email',
+        'address',
+        'city',
+        'commercialId'
+      ]"
       [(selection)]="selectedCustomers"
       [rowHover]="true"
       dataKey="id"
@@ -51,34 +57,46 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th style="width: 3rem">
+          <th [style]="{ width: '30px' }">
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
           <th pSortableColumn="customerName">
-            CustomerName <p-sortIcon field="customerName"></p-sortIcon>
+            Name <p-sortIcon field="customerName"></p-sortIcon>
+          </th>
+          <th pSortableColumn="email">
+            Email <p-sortIcon field="email"></p-sortIcon>
           </th>
           <th pSortableColumn="address">
             Address <p-sortIcon field="address"></p-sortIcon>
           </th>
-          <th pSortableColumn="department">
-            Department <p-sortIcon field="department"></p-sortIcon>
+          <th pSortableColumn="city" [style]="{ width: '100px' }">
+            City <p-sortIcon field="city"></p-sortIcon>
           </th>
-          <th pSortableColumn="commercial">
-            Commercial <p-sortIcon field="commercial"></p-sortIcon>
+          <th pSortableColumn="phone" [style]="{ width: '120px' }">
+            Phone <p-sortIcon field="phone"></p-sortIcon>
           </th>
-          <th>Actions</th>
+          <th pSortableColumn="commercialId">
+            Commercial <p-sortIcon field="commercialId"></p-sortIcon>
+          </th>
+          <th pSortableColumn="monitors">
+            Monitors <p-sortIcon field="monitors"></p-sortIcon>
+          </th>
+          <th [style]="{ width: '100px' }">Actions</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-customer>
         <tr>
-          <td>
+          <td [style]="{ width: '30px' }">
             <p-tableCheckbox [value]="customer"></p-tableCheckbox>
           </td>
           <td>{{ customer.customerName }}</td>
+          <td>{{ customer.email }}</td>
           <td>{{ customer.address }}</td>
-          <td>{{ customer.department }}</td>
-          <td>{{ customer.commercial }}</td>
-          <td>
+          <td [style]="{ width: '100px' }">{{ customer.city }}</td>
+          <td [style]="{ width: '120px' }">{{ customer.phone }}</td>
+          <td>{{ customer.commercialId }}</td>
+          <td>{{ customer.monitors }}</td>
+          <td [style]="{ width: '100px' }">
             <button
               pButton
               pRipple
@@ -109,7 +127,7 @@
   >
     <ng-template pTemplate="content">
       <div class="p-field">
-        <label for="customerName">CustomerName</label>
+        <label for="customerName">Name</label>
         <input
           type="text"
           pInputText
@@ -120,6 +138,20 @@
         />
         <small class="p-invalid" *ngIf="submitted && !customer.customerName"
           >CustomerName is required.</small
+        >
+      </div>
+      <div class="p-field">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          pInputText
+          id="email"
+          [(ngModel)]="customer.email"
+          required
+          autofocus
+        />
+        <small class="p-invalid" *ngIf="submitted && !customer.email"
+          >Email is required.</small
         >
       </div>
       <div class="p-field">
@@ -137,32 +169,35 @@
         >
       </div>
       <div class="p-field">
-        <label for="department">Department</label>
+        <label for="city">City</label>
         <input
           type="text"
           pInputText
-          id="department"
-          [(ngModel)]="customer.department"
+          id="city"
+          [(ngModel)]="customer.city"
           required
           autofocus
         />
-        <small class="p-invalid" *ngIf="submitted && !customer.department"
-          >Department is required.</small
-        >
+      </div>
+      <div class="p-field">
+        <label for="phone">Phone</label>
+        <input
+          type="text"
+          pInputText
+          id="phone"
+          [(ngModel)]="customer.phone"
+          required
+          autofocus
+        />
       </div>
       <div class="p-field">
         <label for="commercial">Commercial</label>
-        <input
-          type="text"
-          pInputText
-          id="commercial"
-          [(ngModel)]="customer.commercial"
-          required
-          autofocus
-        />
-        <small class="p-invalid" *ngIf="submitted && !customer.commercial"
-          >Commercial is required.</small
-        >
+        <p-dropdown
+          [options]="users"
+          [(ngModel)]="selectedUser"
+          optionLabel="lastname"
+          appendTo="body"
+        ></p-dropdown>
       </div>
       <div class="p-field">
         <label for="monitors">Monitors</label>
@@ -174,9 +209,6 @@
           required
           autofocus
         />
-        <small class="p-invalid" *ngIf="submitted && !customer.monitors"
-          >Monitors is required.</small
-        >
       </div>
     </ng-template>
 
@@ -199,9 +231,8 @@
         [disabled]="
           !customer.customerName ||
           !customer.address ||
-          !customer.department ||
-          !customer.commercial ||
-          !customer.monitors
+          !customer.email ||
+          !customer.phone
         "
       ></button>
     </ng-template>

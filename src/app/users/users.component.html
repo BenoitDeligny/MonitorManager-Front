@@ -57,7 +57,7 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th>
+          <th [style]="{ width: '30px' }">
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
           <th pSortableColumn="firstname">
@@ -75,12 +75,12 @@
           <th pSortableColumn="role">
             Role <p-sortIcon field="role"></p-sortIcon>
           </th>
-          <th>Actions</th>
+          <th [style]="{ width: '100px' }">Actions</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-user>
         <tr>
-          <td>
+          <td [style]="{ width: '30px' }">
             <p-tableCheckbox [value]="user"></p-tableCheckbox>
           </td>
           <td>{{ user.firstname }}</td>
@@ -88,7 +88,7 @@
           <td>{{ user.alias }}</td>
           <td>{{ user.email }}</td>
           <td>{{ user.role.name }}</td>
-          <td>
+          <td [style]="{ width: '100px' }">
             <button
               pButton
               pRipple

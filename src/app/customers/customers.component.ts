@@ -1,7 +1,11 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
 import { Customer } from '../shared/models/customer';
+import { User } from '../shared/models/user';
+import { UsersService } from '../users/services/users.service';
 import { CustomersService } from './services/customers.service';
 
 @Component({
@@ -14,14 +18,20 @@ import { CustomersService } from './services/customers.service';
 export class CustomersComponent implements OnInit, OnDestroy {
   // * Mise en place des subscriptions afin de pouvoir unsubscribe
   subscription1$: Subscription;
+  usersSubscription$: Subscription;
+  mySubscription: any;
 
   customers: Customer[];
   customer: Customer;
   selectedCustomers: Customer[];
+  users: User[];
+  selectedUser: User;
   customerDialog: boolean;
   submitted: boolean;
 
   constructor(
+    private router: Router,
+    private usersService: UsersService,
     private customersService: CustomersService,
     private messageService: MessageService,
     private confirmationService: ConfirmationService
@@ -30,13 +40,36 @@ export class CustomersComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription1$ = this.customersService
       .getAllCustomers()
+      .pipe(
+        map((customers) => {
+          for (const customer of customers) {
+            this.usersService
+              .getUserById(customer['commercialId'])
+              .subscribe((data) => {
+                customer.commercial = data;
+              });
+          }
+          this.customers = customers;
+        })
+      )
+      .subscribe(() => {
+        for (const customer of this.customers) {
+          customer.commercial = {};
+        }
+      });
+
+    this.usersSubscription$ = this.usersService
+      .getAllUsers()
       .subscribe((data) => {
-        this.customers = data;
+        this.users = data;
       });
   }
 
   ngOnDestroy() {
     this.subscription1$.unsubscribe();
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
   }
 
   openNew() {
@@ -104,6 +137,11 @@ export class CustomersComponent implements OnInit, OnDestroy {
       this.customers[
         this.findIndexById(this.customer.id.toString())
       ] = this.customer;
+
+      this.customer.commercialId = this.selectedUser.id;
+      this.selectedUser.customers.push(this.customer);
+      this.usersService.updateUser(this.selectedUser);
+
       this.customersService.updateCustomer(this.customer);
       this.messageService.add({
         severity: 'success',
@@ -116,6 +154,8 @@ export class CustomersComponent implements OnInit, OnDestroy {
       this.customerDialog = false;
       this.customer = {};
     } else {
+      this.customer.commercialId = this.selectedUser.id;
+
       this.customersService.saveCustomer(this.customer);
       this.customers.push(this.customer);
       this.messageService.add({
@@ -129,6 +169,8 @@ export class CustomersComponent implements OnInit, OnDestroy {
       this.customerDialog = false;
       this.customer = {};
     }
+
+    //location.reload();
   }
 
   findIndexById(id: string): number {
