@@ -1,5 +1,4 @@
-<div class="overallContainer">
-  <h1>UsersTable Manager</h1>
+<div class="usersContainer">
   <div class="usersTable">
     <p-toast></p-toast>
 
@@ -7,7 +6,13 @@
     <p-table
       #dt
       [value]="users"
-      [globalFilterFields]="['firstname', 'lastname', 'alias', 'email']"
+      [globalFilterFields]="[
+        'firstname',
+        'lastname',
+        'alias',
+        'email',
+        'role.name'
+      ]"
       [(selection)]="selectedUsers"
       [rowHover]="true"
       dataKey="id"
@@ -52,7 +57,7 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th style="width: 3rem">
+          <th>
             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
           </th>
           <th pSortableColumn="firstname">
@@ -67,6 +72,9 @@
           <th pSortableColumn="email">
             Email <p-sortIcon field="email"></p-sortIcon>
           </th>
+          <th pSortableColumn="role">
+            Role <p-sortIcon field="role"></p-sortIcon>
+          </th>
           <th>Actions</th>
         </tr>
       </ng-template>
@@ -79,6 +87,7 @@
           <td>{{ user.lastname }}</td>
           <td>{{ user.alias }}</td>
           <td>{{ user.email }}</td>
+          <td>{{ user.role.name }}</td>
           <td>
             <button
               pButton
@@ -164,6 +173,15 @@
         <small class="p-invalid" *ngIf="submitted && !user.email"
           >Email is required.</small
         >
+      </div>
+      <div class="p-field">
+        <label for="role">Role</label>
+        <p-dropdown
+          [options]="roles"
+          [(ngModel)]="selectedRole"
+          optionLabel="name"
+          appendTo="body"
+        ></p-dropdown>
       </div>
     </ng-template>
 

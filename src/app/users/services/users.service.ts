@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/user';
+import { Role } from 'src/app/shared/models/role';
 
 @Injectable({
   providedIn: 'root',
@@ -24,5 +25,9 @@ export class UsersService {
 
   deleteUser(id: number): void {
     this.http.delete(environment.localUrl + `users/${id}`).subscribe();
+  }
+
+  getRoles(): Observable<Role[]> {
+    return this.http.get<Role[]>(environment.localUrl + 'roles');
   }
 }

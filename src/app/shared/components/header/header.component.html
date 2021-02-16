@@ -1,0 +1,41 @@
+<div class="headerContainer">
+  <div class="logo" [routerLink]="['/home']">
+    <img src="assets/logo-1898929_640.png" alt="Logo Deux M" />
+  </div>
+  <div class="titleMenu">
+    <h1>Monitor Manager</h1>
+    <div
+      *ngIf="
+        route !== '/' &&
+        route !== '/auth' &&
+        route !== '/auth/signin' &&
+        route !== '/auth/signup'
+      "
+      class="menu"
+    >
+      <p-tabMenu [model]="items" [activeItem]="activeItem">
+        <ng-template pTemplate="item" let-item let-i="index">
+          <span [routerLink]="[item.label]">
+            {{ item.label }}
+          </span>
+        </ng-template></p-tabMenu
+      >
+    </div>
+  </div>
+  <div class="settings">
+    <p-avatar
+      icon="pi pi-user"
+      (click)="op.toggle($event)"
+      styleClass="p-mr-2"
+      size="xlarge"
+      shape="circle"
+      [style]="{ 'background-color': '#0d89ec', color: '#ffffff' }"
+    ></p-avatar>
+    <p-overlayPanel #op [style]="{ width: '100px' }">
+      <ng-template pTemplate>
+        <p class="menuOption" [routerLink]="['/profile']">Settings</p>
+        <p class="menuOption" (click)="logout()">Logout</p>
+      </ng-template>
+    </p-overlayPanel>
+  </div>
+</div>

@@ -14,7 +14,6 @@ import {
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -68,6 +67,7 @@ export class RoleGuard
         if (data['role'].name === role) {
           return true;
         } else {
+          alert("Vous n'avez pas les droits pour acceder à cette page !");
           this.router.navigate(['/home']);
           return false;
         }

@@ -51,6 +51,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     InputNumberModule,
     ConfirmDialogModule,
     InputTextareaModule,
+    DropdownModule,
   ],
 })
 export class UsersModule {}

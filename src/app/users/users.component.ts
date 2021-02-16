@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
+import { Role } from '../shared/models/role';
 import { User } from '../shared/models/user';
 import { UsersService } from './services/users.service';
 
@@ -13,9 +14,12 @@ import { UsersService } from './services/users.service';
 })
 export class UsersComponent implements OnInit, OnDestroy {
   // * Mise en place des subscriptions afin de pouvoir unsubscribe
-  subscription1$: Subscription;
+  usersSubscription$: Subscription;
+  rolesSubscription$: Subscription;
 
   users: User[];
+  roles: Role[];
+  selectedRole: Role;
   user: User;
   selectedUsers: User[];
   userDialog: boolean;
@@ -28,13 +32,20 @@ export class UsersComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscription1$ = this.usersService.getAllUsers().subscribe((data) => {
-      this.users = data;
+    this.usersSubscription$ = this.usersService
+      .getAllUsers()
+      .subscribe((data) => {
+        this.users = data;
+      });
+
+    this.rolesSubscription$ = this.usersService.getRoles().subscribe((data) => {
+      this.roles = data;
+      this.selectedRole = this.roles[2];
     });
   }
 
   ngOnDestroy() {
-    this.subscription1$.unsubscribe();
+    this.usersSubscription$.unsubscribe();
   }
 
   openNew() {
@@ -99,6 +110,10 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.submitted = true;
 
     if (this.user.id) {
+      this.user.role = {
+        id: this.selectedRole.id,
+        name: this.selectedRole.name,
+      };
       this.users[this.findIndexById(this.user.id.toString())] = this.user;
       this.usersService.updateUser(this.user);
       this.messageService.add({
@@ -112,7 +127,10 @@ export class UsersComponent implements OnInit, OnDestroy {
       this.userDialog = false;
       this.user = {};
     } else {
-      this.user.password = this.createPassword();
+      this.user.role = {
+        id: this.selectedRole.id,
+        name: this.selectedRole.name,
+      };
       this.usersService.saveUser(this.user);
       this.users.push(this.user);
       this.messageService.add({
@@ -138,15 +156,5 @@ export class UsersComponent implements OnInit, OnDestroy {
     }
 
     return index;
-  }
-
-  createPassword(): string {
-    let id = '';
-    var chars =
-      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    for (var i = 0; i < 7; i++) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return id;
   }
 }
